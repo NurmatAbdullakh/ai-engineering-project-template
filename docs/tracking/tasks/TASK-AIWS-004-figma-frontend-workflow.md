@@ -26,9 +26,11 @@ The workflow is stack-aware but implementation-neutral. Storybook and Playwright
 
 ## Handoff
 - Owner: Product Owner for workflow review; UI/UX Designer and Frontend Engineer for follow-up adoption.
-- Evidence: `docs/workflows/FIGMA_TO_FRONTEND.md` documents Figma preparation, required handoff metadata, Figma inspection, implementation, responsive/accessibility checks, visual QA, acceptance criteria, roles, and security boundaries.
+- Evidence:
+  - `docs/workflows/FIGMA_TO_FRONTEND.md` — end-to-end process, tool capabilities/limitations, design preparation, implementation, visual QA, acceptance, roles, and security.
+  - `docs/workflows/templates/FIGMA_HANDOFF_TEMPLATE.md` — copy-ready per-feature handoff checklist.
 - Figma verification: Figma `whoami` returned an authenticated response. Available tool surface was inspected for metadata, design context, screenshots, Figma editing, libraries/variables, comments, Code Connect, web-page capture, and code import. No specific design file was inspected because no file URL/node was supplied.
 - Limitations recorded: Figma design context is reference material to adapt; code import creates a Figma Code layer and does not guarantee native Design generation, application preview, or publishing. File access and edits depend on file key, node ID, and permissions.
 - Validation: Repository-required task frontmatter fields and allowed status/priority values are used. GitHub Actions task validation/dashboard build are pending PR checks. No application code or runtime dependencies were added.
 - Blockers: None for documenting the workflow. Applying it to a real screen requires the relevant Figma file and frame link.
-- Next step: Product Owner reviews and approves the workflow; adopt the handoff block on the next frontend task.
+- Next step: Product Owner reviews and approves the workflow; adopt the handoff template on the next frontend task.
