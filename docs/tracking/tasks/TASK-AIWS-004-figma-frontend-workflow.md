@@ -2,7 +2,7 @@
 id: TASK-AIWS-004
 title: Define Figma to frontend implementation workflow
 feature: design-to-code
-status: TODO
+status: IN_PROGRESS
 priority: HIGH
 assignee: UI_UX_DESIGNER
 sprint: SPRINT-AIWS-001
@@ -22,10 +22,10 @@ Define a repeatable design handoff from Figma to frontend implementation and vis
 - [ ] Figma MCP capabilities and limitations are verified before promising automated file access or edits.
 
 ## Implementation notes
-Separate design artifact review from actual application rendering. Storybook and Playwright may be evaluated for component preview and browser verification.
+Separate design artifact review from actual application rendering. Storybook and Playwright may be evaluated for component preview and browser verification. No application frontend currently exists in this workspace repository, so the workflow must be stack-aware but implementation-neutral.
 
 ## Handoff
 - Owner: UI/UX Designer
-- Evidence:
-- Blockers: Awaiting workflow approval and verification of available Figma actions.
-- Next step: Produce the design handoff specification.
+- Evidence: Project context, workflow, and this task reviewed on main. Figma MCP tool surface and authenticated connection are being verified.
+- Blockers: No specific Figma file/design URL supplied; workflow specification can be completed without inspecting a project-specific canvas.
+- Next step: Publish the design handoff specification and submit it for review.
