@@ -1,34 +1,57 @@
 name: Validate and publish dashboard
+
 on:
   pull_request:
-    paths: ["docs/tracking/**", "dashboard/**", "scripts/**", "package.json", ".github/workflows/dashboard.yml"]
+    paths:
+      - "docs/tracking/**"
+      - "dashboard/**"
+      - "scripts/**"
+      - "package.json"
+      - ".github/workflows/dashboard.yml"
   push:
     branches: [main]
-    paths: ["docs/tracking/**", "dashboard/**", "scripts/**", "package.json", ".github/workflows/dashboard.yml"]
+    paths:
+      - "docs/tracking/**"
+      - "dashboard/**"
+      - "scripts/**"
+      - "package.json"
+      - ".github/workflows/dashboard.yml"
   workflow_dispatch:
+
+# Default-deny at workflow level. Jobs opt into only the permissions they need.
 permissions:
   contents: read
-  pages: write
-  id-token: write
-concurrency:
-  group: pages
-  cancel-in-progress: true
+
 jobs:
   validate:
+    name: Validate tasks and build dashboard
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: {node-version: 22}
+        with:
+          node-version: 22
       - run: npm run validate
       - run: npm run dashboard:build
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        with: {path: dashboard}
+        with:
+          path: dashboard
+
   deploy:
+    name: Publish GitHub Pages dashboard
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: validate
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
