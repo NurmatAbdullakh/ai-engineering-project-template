@@ -10,7 +10,7 @@
 - This repository is the Markdown-first operating system and reusable template for an AI-assisted engineering workspace.
 - It contains team instructions, agent role definitions, task tracking, generated dashboard assets, and GitHub Actions automation.
 - It is not itself the POS SaaS application or a production runtime for autonomous agents.
-- Agent role profiles are documented capabilities; they do not imply that multi-agent orchestration or unattended execution is already implemented.
+- Agent role profiles are documented capabilities; they do not, by themselves, provide runtime orchestration, policy enforcement, or unattended execution.
 
 ## Technology
 - Workspace source of truth: Markdown documents in `docs/`.
@@ -19,9 +19,10 @@
 - CI/CD: GitHub Actions; current workflow validates task metadata and builds/publishes the task dashboard.
 - Integrations available to the owner: GitHub, Figma, Postman, Context7, and tldraw.
 - Frontend: No application frontend is currently defined in this template.
-- Backend: No application backend or agent orchestration runtime is currently defined in this template.
+- Backend: No application backend or agent orchestration runtime is currently implemented.
 - Database: No application database is currently defined in this template.
 - Infrastructure: GitHub repository and GitHub Actions; deployment target beyond the current dashboard publishing workflow is not yet defined.
+- Agent runtime: Vendor-neutral MVP design is proposed in `docs/architecture/AGENT_RUNTIME_MVP_DESIGN.md`; technology choices in ADR-0002 are pending owner approval.
 
 ## Team and roles
 The workspace defines these roles: Product Owner, Project Manager, Business Analyst, UI/UX Designer, Software Architect, Backend Engineer, Frontend Engineer, QA Engineer, Security Reviewer, DevOps Engineer, and Team Lead.
@@ -38,9 +39,9 @@ The Product Owner retains final authority over product scope, accepted architect
 - Budget: Prefer existing connected tools and lightweight automation; record model/tool cost considerations before introducing recurring or high-volume agent execution.
 
 ## Current state
-- Current milestone: Establish the workspace foundation and a safe, traceable agent-assisted delivery workflow.
-- Current sprint: SPRINT-AIWS-001 — foundation, workflow, orchestration design, Figma handoff, MCP policy, and CI/CD approval design.
-- Completed baseline: Repository documentation and task/dashboard scripts exist; 11 role profiles are documented; GitHub Actions validates task metadata and builds/publishes the dashboard.
-- In progress: Clarifying project context and strengthening the team workflow contract.
+- Current milestone: Move from documented operating practices toward a safe, testable Agent Runtime MVP.
+- Current sprint: SPRINT-AIWS-002 — define the vendor-neutral Agent Runtime MVP design and obtain owner/security decisions before implementation.
+- Completed baseline: Repository documentation and task/dashboard scripts exist; 11 role profiles are documented; GitHub Actions validates task metadata and builds/publishes the dashboard; foundation, workflow, orchestration, Figma handoff, MCP security, and CI/CD governance documents are present.
+- In progress: TASK-AIWS-007 — Agent Runtime MVP technical design and ADR-0002 review.
 - Not implemented yet: Runtime multi-agent orchestration, automated Figma-to-code handoff, centralized MCP policy enforcement, full application CI pipeline, and production deployment approval automation.
-- Known blockers: The concrete agent orchestration runtime, application stack, deployment target, and permission model still need explicit design and owner approval.
+- Known blockers: ADR-0001 and ADR-0002 require Product Owner review; Security Reviewer must approve the threat model and sandbox/tool boundary before write-capable agent execution. Initial provider, persistence, and local execution approach remain unselected.
