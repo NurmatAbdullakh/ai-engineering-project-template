@@ -1,0 +1,11 @@
+{
+  "name": "ai-engineering-project-template",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-tasks.mjs",
+    "dashboard:build": "node scripts/generate-dashboard.mjs",
+    "dashboard:serve": "node scripts/serve-dashboard.mjs"
+  }
+}

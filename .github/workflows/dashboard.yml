@@ -1,0 +1,37 @@
+name: Validate and publish dashboard
+on:
+  pull_request:
+    paths: ["docs/tracking/**", "dashboard/**", "scripts/**", "package.json", ".github/workflows/dashboard.yml"]
+  push:
+    branches: [main]
+    paths: ["docs/tracking/**", "dashboard/**", "scripts/**", "package.json", ".github/workflows/dashboard.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: npm run validate
+      - run: npm run dashboard:build
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        with: {path: dashboard}
+  deploy:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: validate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
