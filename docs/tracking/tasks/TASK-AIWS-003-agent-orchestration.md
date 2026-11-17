@@ -2,7 +2,7 @@
 id: TASK-AIWS-003
 title: Design multi-agent orchestration architecture
 feature: agent-orchestration
-status: TODO
+status: IN_PROGRESS
 priority: HIGH
 assignee: SOFTWARE_ARCHITECT
 sprint: SPRINT-AIWS-001
@@ -27,6 +27,6 @@ Evaluate a minimal coordinator-first architecture before introducing a complex m
 
 ## Handoff
 - Owner: Software Architect
-- Evidence:
-- Blockers: Awaiting foundation documentation review.
-- Next step: Produce an architecture proposal and ADR.
+- Evidence: Foundation documents reviewed on main; architecture proposal and ADR are being drafted on `feat/agent-orchestration-architecture`.
+- Blockers: None identified for producing a technology-neutral architecture proposal. Runtime implementation remains out of scope.
+- Next step: Review the coordinator-first proposal with the Product Owner; do not implement a runtime until the ADR is accepted.
