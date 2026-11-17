@@ -56,6 +56,8 @@ A static screenshot is not a complete handoff when the screen includes meaningfu
 
 ## 4. Required design handoff
 
+Use the copy-ready checklist at [`templates/FIGMA_HANDOFF_TEMPLATE.md`](templates/FIGMA_HANDOFF_TEMPLATE.md) when creating a task handoff. The template captures the same required information in a reusable format.
+
 Create or update the implementation task in `docs/tracking/tasks/` and include the following block in its handoff section:
 
 ```md
