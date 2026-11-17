@@ -12,13 +12,23 @@
 - DevOps Engineer owns CI/CD and operational readiness.
 - Team Lead coordinates assignments, integration, and cross-role handoffs.
 
-Role profiles describe responsibilities. They do not, by themselves, provide runtime orchestration, shared memory, tool permissions, or autonomous agent-to-agent communication. Those capabilities must be implemented and tested explicitly.
+The current execution model uses one persistent ChatGPT conversation per specialist role. The user manually routes tasks and artifacts between these chats. Role profiles do not automatically provide shared chat memory, runtime orchestration, tool permissions, or autonomous agent-to-agent communication. See [the persistent chat operating model](./CHAT_BASED_AGENT_OPERATING_MODEL.md).
 
 ## Source of truth
 - Project context, team rules, architecture decisions, and product/technical documentation in `docs/` are authoritative.
 - Task files in `docs/tracking/tasks/` are the canonical work-item records.
 - The dashboard is generated from task frontmatter; never edit `dashboard/data/dashboard.json` manually.
 - GitHub issues and pull requests support collaboration, but do not silently replace the repository's documented source of truth.
+- Chat history is not a substitute for a current task file, accepted ADR, implementation, or review evidence.
+
+## Persistent chat setup and task routing
+1. Create one dedicated conversation for each role in `.github/agents/`; keep that chat assigned to the same role and project.
+2. Initialize it with [the shared bootstrap prompt](./templates/CHAT_AGENT_BOOTSTRAP.md), the workspace repository URL, the target product repository URL, and the role profile URL.
+3. Each chat reads the workspace context and workflow, the target repository's instructions, the current task, relevant upstream artifacts, and only the skills required by its role/task. Use [the agent-to-skill matrix](./AGENT_SKILL_MATRIX.md).
+4. The Product Owner chat clarifies product intent and prepares/approves the product brief. Business Analyst, Project Manager, Designer, Architect, and implementation/review roles are engaged as required by the feature flow.
+5. The user manually supplies the next role chat with the canonical GitHub task/artifact links and expected output. Do not assume automatic chat-to-chat context transfer.
+6. The receiving chat verifies that referenced files and approvals exist, acknowledges the handoff, and records its own deliverables and evidence in GitHub.
+7. Reuse the same role chat for later tasks. If context is lost or the conversation is replaced, bootstrap again and reconstruct state from GitHub rather than relying on an old chat summary.
 
 ## Task lifecycle
 Allowed task statuses: `TODO`, `IN_PROGRESS`, `IN_REVIEW`, `DONE`, `BLOCKED`, and `CANCELLED`.
